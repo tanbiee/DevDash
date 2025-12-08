@@ -1,0 +1,37 @@
+name: React CI Pipeline
+
+# Trigger: When to run this robot?
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build_test:
+    name: Build & Test
+    runs-on: ubuntu-latest  # The robot uses a Linux machine
+
+    steps:
+    # 1. Download the code from the repo
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    # 2. Install Node.js (v18)
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    # 3. Install dependencies (npm install)
+    - name: Install Dependencies
+      run: npm install
+
+    # 4. Check for linting errors (Optional, good practice)
+    # - name: Lint Code
+    #   run: npm run lint
+
+    # 5. Build the app (The most important test)
+    - name: Build Application
+      run: npm run build

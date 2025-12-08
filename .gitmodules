@@ -1,0 +1,3 @@
+[submodule "Desktop/projects/dashboard/vite-project"]
+	path = Desktop/projects/dashboard/vite-project
+	url = https://github.com/tanbiee/DevDash.git

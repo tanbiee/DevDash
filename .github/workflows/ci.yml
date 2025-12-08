@@ -32,4 +32,8 @@ jobs:
         context: .
         push: true
         # REPLACE 'your-username' below with your actual Docker Hub username!
+<<<<<<< HEAD
         tags: ${{ secrets.DOCKER_USERNAME }}/devdash:latest
+=======
+        tags: ${{ secrets.DOCKER_USERNAME }}/devdash:latest
+>>>>>>> 8dddf3742aab7ddbef519abbc229f4b4598e1049

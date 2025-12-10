@@ -165,7 +165,7 @@ const App = () => {
                           <td className="px-6 py-4 text-sm text-gray-400">{user.address.city}</td>
                           <td className="px-6 py-4">
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-400">
-                              passive
+                              Active
                             </span>
                           </td>
                         </tr>

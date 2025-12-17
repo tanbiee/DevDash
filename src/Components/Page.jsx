@@ -53,7 +53,7 @@ const App = () => {
       <aside className="w-64 bg-gray-800 border-r border-gray-700 hidden md:flex flex-col p-4">
         <div className="flex items-center space-x-2 mb-8 px-2">
           <LayoutDashboard className="text-blue-500" size={28} />
-          <span className="text-xl font-bold text-white">DevDash</span>
+          <span className="text-xl font-bold text-white">Dashboard</span>
         </div>
 
         <nav className="flex-1 space-y-2">

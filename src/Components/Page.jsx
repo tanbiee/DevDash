@@ -2,19 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, Users, Activity, Settings, Bell, Search, TrendingUp, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
 // SidebarItem declared outside of `App` to avoid creating a component during render
-const SidebarItem = ({ icon: Icon, label, id, activeTab, setActiveTab }) => (
-  <button
-    onClick={() => setActiveTab(id)}
-    className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-colors ${
-      activeTab === id 
-        ? 'bg-blue-600 text-white' 
-        : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-    }`}
-  >
-    <Icon size={20} />
-    <span className="font-medium">{label}</span>
-  </button>
-);
+const SidebarItem = ({ icon, label, id, activeTab, setActiveTab }) => {
+  const Icon = icon;
+  return (
+    <button
+      onClick={() => setActiveTab(id)}
+      className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-colors ${
+        activeTab === id 
+          ? 'bg-blue-600 text-white' 
+          : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+      }`}
+    >
+      <Icon size={20} />
+      <span className="font-medium">{label}</span>
+    </button>
+  );
+};
 
 const App = () => {
   // State for storing data fetched from API

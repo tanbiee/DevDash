@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { LayoutDashboard, Users, Activity, Settings, Bell, Search, TrendingUp, DollarSign, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 
+// SidebarItem declared outside of `App` to avoid creating a component during render
+const SidebarItem = ({ icon: Icon, label, id, activeTab, setActiveTab }) => (
+  <button
+    onClick={() => setActiveTab(id)}
+    className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-colors ${
+      activeTab === id 
+        ? 'bg-blue-600 text-white' 
+        : 'text-gray-400 hover:bg-gray-800 hover:text-white'
+    }`}
+  >
+    <Icon size={20} />
+    <span className="font-medium">{label}</span>
+  </button>
+);
+
 const App = () => {
   // State for storing data fetched from API
   const [users, setUsers] = useState([]);
@@ -32,19 +47,7 @@ const App = () => {
     { title: 'Bounce Rate', value: '12.23%', change: '-4.5%', icon: Activity, positive: false }, // Negative change is good for bounce rate usually, but logic depends on context
   ];
 
-  const SidebarItem = ({ icon: Icon, label, id }) => (
-    <button
-      onClick={() => setActiveTab(id)}
-      className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-colors ${
-        activeTab === id 
-          ? 'bg-blue-600 text-white' 
-          : 'text-gray-400 hover:bg-gray-800 hover:text-white'
-      }`}
-    >
-      <Icon size={20} />
-      <span className="font-medium">{label}</span>
-    </button>
-  );
+  
 
   return (
     // Changed to fixed inset-0 w-screen h-screen to override default Vite/parent container constraints
@@ -57,10 +60,10 @@ const App = () => {
         </div>
 
         <nav className="flex-1 space-y-2">
-          <SidebarItem icon={LayoutDashboard} label="Overview" id="dashboard" />
-          <SidebarItem icon={Users} label="Customers" id="customers" />
-          <SidebarItem icon={Activity} label="Analytics" id="analytics" />
-          <SidebarItem icon={Settings} label="Settings" id="settings" />
+          <SidebarItem icon={LayoutDashboard} label="Overview" id="dashboard" activeTab={activeTab} setActiveTab={setActiveTab} />
+          <SidebarItem icon={Users} label="Customers" id="customers" activeTab={activeTab} setActiveTab={setActiveTab} />
+          <SidebarItem icon={Activity} label="Analytics" id="analytics" activeTab={activeTab} setActiveTab={setActiveTab} />
+          <SidebarItem icon={Settings} label="Settings" id="settings" activeTab={activeTab} setActiveTab={setActiveTab} />
         </nav>
 
         <div className="p-4 bg-gray-700/50 rounded-xl mt-auto">

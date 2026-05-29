@@ -14,14 +14,26 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'git submodule update --init --recursive'
+                script {
+                    if (isUnix()) {
+                        sh 'git submodule update --init --recursive'
+                    } else {
+                        bat 'git submodule update --init --recursive'
+                    }
+                }
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 dir("${APP_DIR}") {
-                    sh 'npm ci'
+                    script {
+                        if (isUnix()) {
+                            sh 'npm ci'
+                        } else {
+                            bat 'npm ci'
+                        }
+                    }
                 }
             }
         }
@@ -29,7 +41,13 @@ pipeline {
         stage('Lint') {
             steps {
                 dir("${APP_DIR}") {
-                    sh 'npm run lint'
+                    script {
+                        if (isUnix()) {
+                            sh 'npm run lint'
+                        } else {
+                            bat 'npm run lint'
+                        }
+                    }
                 }
             }
         }
@@ -37,7 +55,13 @@ pipeline {
         stage('Build') {
             steps {
                 dir("${APP_DIR}") {
-                    sh 'npm run build'
+                    script {
+                        if (isUnix()) {
+                            sh 'npm run build'
+                        } else {
+                            bat 'npm run build'
+                        }
+                    }
                 }
             }
         }
@@ -45,7 +69,13 @@ pipeline {
         stage('Docker Build') {
             steps {
                 dir("${APP_DIR}") {
-                    sh 'docker build -t ${IMAGE_NAME} .'
+                    script {
+                        if (isUnix()) {
+                            sh 'docker build -t ${IMAGE_NAME} .'
+                        } else {
+                            bat "docker build -t %IMAGE_NAME% ."
+                        }
+                    }
                 }
             }
         }
